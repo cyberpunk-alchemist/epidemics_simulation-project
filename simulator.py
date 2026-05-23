@@ -1,5 +1,6 @@
 from human import Human, States
 import numpy as np
+from visualizer import Visualizer
 
 class Simulator():
     def __init__(self):
@@ -31,6 +32,7 @@ class Simulator():
         self.cure = kwargs.get("cure",self.cure)
         self.simulation_steps = kwargs.get("sim_steps",self.simulation_steps)
         self.init_ill = kwargs.get("init_ill",self.init_ill)
+        self.filename = kwargs.get("filename",self.filename)
 
     def generate_system(self):
         self.human_matrix = []
@@ -93,8 +95,8 @@ class Simulator():
         str1 = """"""
         str2 = """"""
         for i in range(len(self.results_total)):
-            str1 = str1 + str(self.results_total[i]).strip()[1:-1] + "\n"
-            str2 = str2 + str(self.results_per_city[i]).strip()[1:-1] + "\n"
+            str1 = str1 + str(self.results_total[i]).strip()[1:-1].replace(","," ")+ "\n"
+            str2 = str2 + str(self.results_per_city[i]).strip()[1:-1].replace(","," ") + "\n"
         with open(f"{filename}.tot.txt","w") as f:
             f.write(str1)
         with open(f"{filename}.per_city.txt","w") as f:
@@ -120,10 +122,11 @@ class Simulator():
                     self.imune_index_list.append(ill_index)
 
             self.store_data()
-            print(f"{i+1}/{self.simulation_steps} steps calculated")
+            if (i+1)%10 == 0:
+                print(f"{i+1}/{self.simulation_steps} steps calculated")
         if self.save_results:
             self.save_data_to_file(self.filename)
-                
-
-sim = Simulator()
-sim.run()
+        viz = Visualizer()
+        viz.load_data(self.filename+".tot.txt",self.filename+".per_city.txt")
+        viz.plot_data(True)
+        

@@ -28,12 +28,20 @@ class Interface(ctk.CTk):
 
     def run_button_callback(self):
         """callback function for running the simulation"""
+        self.error_lable.configure(text=f"Running...",text_color="white")
+        self.update_idletasks()
         try:
             if float(self.scrollable_frame.entry_1.get()) < 0 or float(self.scrollable_frame.entry_2.get()) < 0 or float(self.scrollable_frame.entry_3.get()) < 0 or float(self.scrollable_frame.entry_4.get()) < 0 or float(self.scrollable_frame.entry_7.get()) < 0 or float(self.scrollable_frame.entry_8.get()) < 0:
                 self.error_lable.configure(text="Error: Negative values!",text_color="red")
                 return
             if float(self.scrollable_frame.entry_5.get()) < 0 or float(self.scrollable_frame.entry_5.get()) > 1 or float(self.scrollable_frame.entry_6.get()) < 0 or float(self.scrollable_frame.entry_6.get()) > 1:
                 self.error_lable.configure(text="Error: Probability not in [0,1] range!",text_color="red")
+                return
+            if int(self.scrollable_frame.entry_8.get()) > int(self.scrollable_frame.entry_2.get()):
+                self.error_lable.configure(text="Error: Initial infected > city population!",text_color="red")
+                return
+            if int(self.scrollable_frame.entry_2.get())<2 or int(self.scrollable_frame.entry_1.get())<2:
+                self.error_lable.configure(text="Error: At least 2 cities with at least 2 people",text_color="red")
                 return
 
             self.simulator.set_params(
@@ -43,8 +51,9 @@ class Interface(ctk.CTk):
                 out_city_int = int(self.scrollable_frame.entry_4.get()),
                 imunity_fade = float(self.scrollable_frame.entry_5.get()),
                 cure= float(self.scrollable_frame.entry_6.get()),
-                simulation_steps= int(self.scrollable_frame.entry_7.get()),
-                init_ill=int(self.scrollable_frame.entry_8.get())
+                sim_steps= int(self.scrollable_frame.entry_7.get()),
+                init_ill=int(self.scrollable_frame.entry_8.get()),
+                filename=str(self.scrollable_frame.entry_9.get())
             )
 
         except:
@@ -113,5 +122,11 @@ class ScrollableFrame(ctk.CTkScrollableFrame):
         self.entry_8 = ctk.CTkEntry(self, width=200, placeholder_text="init_ill")
         self.entry_8.insert(0,str(self.master.simulator.init_ill)) #type: ignore
         self.entry_8.grid(row=10, column=1, padx=10, pady=5, sticky="w") 
+
+        self.entry_label_9 = ctk.CTkLabel(self, text="Název souboru pro uložení dat (bez přípony):")
+        self.entry_label_9.grid(row=11, column=0, padx=10, pady=5, sticky="w")
+        self.entry_9 = ctk.CTkEntry(self, width=200, placeholder_text="filename")
+        self.entry_9.insert(0,str(self.master.simulator.filename)) #type: ignore
+        self.entry_9.grid(row=11, column=1, padx=10, pady=5, sticky="w") 
 
         
