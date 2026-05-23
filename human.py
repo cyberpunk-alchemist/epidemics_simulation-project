@@ -2,9 +2,9 @@ import numpy as np
 from enum import Enum
 
 class States(Enum):
-    V = "healthy"
-    N = "ill"
-    I = "imune"
+    V = "vnimavyy"
+    N = "nemocny"
+    I = "imunni"
 
 
 
