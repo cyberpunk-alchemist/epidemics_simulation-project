@@ -4,13 +4,13 @@ from visualizer import Visualizer
 
 class Simulator():
     def __init__(self):
-        self.n_cities = 4 #pocet mest
-        self.city_pop = 300 #pocet lidi ve meste
-        self.in_city_int = 30 #interakce v kazdem meste P
-        self.out_city_int = 30 # interakce mezi mesty X
-        self.imunity_fade = 0.05 #pravdepodobnost ztraty imunity
-        self.cure = 0.3 #pravdepodobnost uzdraveni
-        self.simulation_steps = 1000
+        self.n_cities = 30 #pocet mest
+        self.city_pop = 1000 #pocet lidi ve meste
+        self.in_city_int = 65 #interakce v kazdem meste P
+        self.out_city_int = 1 # interakce mezi mesty X
+        self.imunity_fade = 0.005 #pravdepodobnost ztraty imunity
+        self.cure = 0.1 #pravdepodobnost uzdraveni
+        self.simulation_steps = 4000
         self.init_ill = 10 #pocet lidi kteri jsou nemocni na pocatku simulace (v meste 1)
 
         self.save_results = True
@@ -112,7 +112,7 @@ class Simulator():
                 for city_index_2 in range(city_index+1,self.n_cities): # for all city_index_2 > city_index
                     self.city_city_interaction(city_index,city_index_2)
             for imune_index in self.imune_index_list[:]:
-                if np.random.rand() < self.cure:
+                if np.random.rand() < self.imunity_fade:
                     self.human_matrix[imune_index[0]][imune_index[1]].fade()
                     self.imune_index_list.remove(imune_index)
             for ill_index in self.infected_index_list[:]:

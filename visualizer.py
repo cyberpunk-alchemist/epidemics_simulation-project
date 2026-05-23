@@ -51,17 +51,18 @@ class Visualizer():
         if self.ncities == 0:
             raise ValueError("No data vere loaded!")
         
-        for i in range(self.ncities):
-            fig, ax = plt.subplots()
-            ax.set_xlabel("Časové kroky [N]")
-            ax.set_ylabel("Počet lidí [N]")
-            ax.set_title(f"Vývoj nemoci ve městě {i+1}")
-            ax.plot(self.x, self.V_per_city[i], label="Vnímaví",color="#437C90")
-            ax.plot(self.x, self.N_per_city[i], label="Nemocní",color="#DD614A")
-            ax.plot(self.x, self.I_per_city[i], label="Imunní",color="#A69658")
-            ax.legend()
-            fig.savefig(f"plots/{self.name}-city_{i+1}", dpi=300, bbox_inches="tight")
-            plt.close(fig)
+        if save:
+            for i in range(self.ncities):
+                fig, ax = plt.subplots()
+                ax.set_xlabel("Časové kroky [N]")
+                ax.set_ylabel("Počet lidí [N]")
+                ax.set_title(f"Vývoj nemoci ve městě č. {i+1}")
+                ax.plot(self.x, self.V_per_city[i], label="Vnímaví",color="#437C90")
+                ax.plot(self.x, self.N_per_city[i], label="Nemocní",color="#DD614A")
+                ax.plot(self.x, self.I_per_city[i], label="Imunní",color="#A69658")
+                ax.legend()
+                fig.savefig(f"plots/{self.name}-city_{i+1}", dpi=300, bbox_inches="tight")
+                plt.close(fig)
         
         self.fig, self.ax = plt.subplots()
         self.ax.set_xlabel("Časové kroky [N]")
@@ -71,7 +72,8 @@ class Visualizer():
         self.ax.plot(self.x, self.N, label="Nemocní",color="#DD614A")
         self.ax.plot(self.x, self.I, label="Imunní",color="#A69658")
         self.ax.legend()
-        fig.savefig(f"plots/{self.name}-total", dpi=300, bbox_inches="tight")
+        if save:
+            self.fig.savefig(f"plots/{self.name}-total", dpi=300, bbox_inches="tight")
         plt.show()
 
 
