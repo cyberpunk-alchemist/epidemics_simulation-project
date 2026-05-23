@@ -29,15 +29,12 @@ class Interface(ctk.CTk):
     def run_button_callback(self):
         """callback function for running the simulation"""
         try:
-        #     if float(self.scrollable_frame.entry_1.get()) > float(self.scrollable_frame.entry_2.get()):
-        #         self.error_lable.configure(text="Error: You can't travel back in time!",text_color="red")
-        #         return
-        #     negative_error = "Error: Negative value in a place it should not be!"
-        #     if float(self.scrollable_frame.entry_4.get()) < 0 or float(self.scrollable_frame.entry_5.get()) < 0 or int(self.scrollable_frame.entry_3.get()) < 0 or float(self.scrollable_frame.entry_6.get()) < 0:
-        #         self.error_lable.configure(text=negative_error,text_color="red")
-        #         return
-        #     if float(self.scrollable_frame.entry_7.get()) < 0 or float(self.scrollable_frame.entry_8.get()) < 0:
-        #         self.error_lable.configure(text="Warning: Negative rate constants!",text_color="yellow")
+            if float(self.scrollable_frame.entry_1.get()) < 0 or float(self.scrollable_frame.entry_2.get()) < 0 or float(self.scrollable_frame.entry_3.get()) < 0 or float(self.scrollable_frame.entry_4.get()) < 0 or float(self.scrollable_frame.entry_7.get()) < 0 or float(self.scrollable_frame.entry_8.get()) < 0:
+                self.error_lable.configure(text="Error: Negative values!",text_color="red")
+                return
+            if float(self.scrollable_frame.entry_5.get()) < 0 or float(self.scrollable_frame.entry_5.get()) > 1 or float(self.scrollable_frame.entry_6.get()) < 0 or float(self.scrollable_frame.entry_6.get()) > 1:
+                self.error_lable.configure(text="Error: Probability not in [0,1] range!",text_color="red")
+                return
 
             self.simulator.set_params(
                 n_cities = int(self.scrollable_frame.entry_1.get()),
