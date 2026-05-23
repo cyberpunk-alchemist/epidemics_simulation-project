@@ -4,13 +4,13 @@ from visualizer import Visualizer
 
 class Simulator():
     def __init__(self):
-        self.n_cities = 2 #pocet mest
-        self.city_pop = 100 #pocet lidi ve meste
+        self.n_cities = 4 #pocet mest
+        self.city_pop = 300 #pocet lidi ve meste
         self.in_city_int = 30 #interakce v kazdem meste P
         self.out_city_int = 30 # interakce mezi mesty X
-        self.imunity_fade = 0.1 #pravdepodobnost ztraty imunity
+        self.imunity_fade = 0.05 #pravdepodobnost ztraty imunity
         self.cure = 0.3 #pravdepodobnost uzdraveni
-        self.simulation_steps = 100
+        self.simulation_steps = 1000
         self.init_ill = 10 #pocet lidi kteri jsou nemocni na pocatku simulace (v meste 1)
 
         self.save_results = True
