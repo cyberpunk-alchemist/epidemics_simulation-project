@@ -9,9 +9,10 @@ class States(Enum):
 
 
 class Human():
-    def __init__(self,city_ID):
-        """stores info about city residence and a state"""
-        self.residency=city_ID
+    def __init__(self,ID: tuple):
+        """stores info about city residence and a state
+        ID should be a tuple of (city_ID, person_ID)"""
+        self.ID=ID 
         self.state=States.V
     
     def cure(self):

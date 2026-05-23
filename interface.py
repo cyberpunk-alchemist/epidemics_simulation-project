@@ -97,10 +97,10 @@ class ScrollableFrame(ctk.CTkScrollableFrame):
         self.entry_5.grid(row=7, column=1, padx=10, pady=5, sticky="w") 
 
         self.entry_label_6 = ctk.CTkLabel(self, text="Pravděpodobnost uzdravení [0-1]:")
-        self.entry_label_6.grid(row=9, column=0, padx=10, pady=5, sticky="w")
+        self.entry_label_6.grid(row=8, column=0, padx=10, pady=5, sticky="w")
         self.entry_6 = ctk.CTkEntry(self, width=200, placeholder_text="cure")
         self.entry_6.insert(0,str(self.master.simulator.cure)) #type: ignore
-        self.entry_6.grid(row=9, column=1, padx=10, pady=5, sticky="w") 
+        self.entry_6.grid(row=8, column=1, padx=10, pady=5, sticky="w") 
 
         self.entry_label_7 = ctk.CTkLabel(self, text="Počet kroků simulace [N]:")
         self.entry_label_7.grid(row=9, column=0, padx=10, pady=5, sticky="w")
@@ -109,9 +109,9 @@ class ScrollableFrame(ctk.CTkScrollableFrame):
         self.entry_7.grid(row=9, column=1, padx=10, pady=5, sticky="w") 
 
         self.entry_label_8 = ctk.CTkLabel(self, text="Počáteční počet nemocných (město 1) [N]:")
-        self.entry_label_8.grid(row=9, column=0, padx=10, pady=5, sticky="w")
+        self.entry_label_8.grid(row=10, column=0, padx=10, pady=5, sticky="w")
         self.entry_8 = ctk.CTkEntry(self, width=200, placeholder_text="init_ill")
         self.entry_8.insert(0,str(self.master.simulator.init_ill)) #type: ignore
-        self.entry_8.grid(row=9, column=1, padx=10, pady=5, sticky="w") 
+        self.entry_8.grid(row=10, column=1, padx=10, pady=5, sticky="w") 
 
         
